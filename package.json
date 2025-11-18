@@ -4,11 +4,30 @@
   "author": "arcostasi",
   "license": "MIT",
   "description": "An AVR8js and Wokwi Elements playground implemented with Electron.",
+  "main": "./dist/app/main.js",
   "scripts": {
-    "build": "tsc",
+    "compile": "tsc",
     "watch": "tsc -w",
     "start": "electron ./dist/app/main.js",
-    "dev": "tsc && electron ./dist/app/main.js"
+    "dev": "tsc && electron ./dist/app/main.js",
+    "build": "npm run compile && electron-builder",
+    "dist": "npm run compile && electron-builder"
+  },
+  "build": {
+    "appId": "com.arcostasi.avr8jsplayground",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "identity": null
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ]
   },
   "dependencies": {
     "@panzoom/panzoom": "^4.5.1",
@@ -23,7 +42,8 @@
     "split.js": "^1.6.5"
   },
   "devDependencies": {
-    "electron": "^23.1.0",
+    "electron": "^34.0.2",
+    "electron-builder": "^24.13.3",
     "typescript": "^4.9.5"
   }
 }
